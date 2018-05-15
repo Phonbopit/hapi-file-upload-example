@@ -1,0 +1,13 @@
+{
+  "name": "hapi-file-upload-example",
+  "version": "1.0.0",
+  "description": "Hapi File Upload Example",
+  "license": "MIT",
+  "scripts": {
+  	"start": "node server.js"
+  },
+  "dependencies": {
+    "hapi": "^17.4.0",
+    "inert": "^5.1.0"
+  }
+}
