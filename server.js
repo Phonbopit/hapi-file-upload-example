@@ -14,6 +14,16 @@ const init = async () => {
   })
 
   server.route({
+    method: 'GET',
+    path: '/upload/{file*}',
+    handler: {
+      directory: {
+        path: 'upload'
+      }
+    }
+  })
+
+  server.route({
     path: '/upload',
     method: 'POST',
     options: {
@@ -34,11 +44,17 @@ const init = async () => {
 
 const handleFileUpload = file => {
   return new Promise((resolve, reject) => {
-    fs.writeFile('./upload/' + file.hapi.filename, file._data, err => {
+    const filename = file.hapi.filename
+    const data = file._data
+
+    fs.writeFile(`./upload/${filename}`, data, err => {
       if (err) {
         reject(err)
       }
-      resolve({ message: 'Upload successfully!' })
+      resolve({
+        message: 'Upload successfully!',
+        imageUrl: `${server.info.uri}/upload/${filename}`
+      })
     })
   })
 }
